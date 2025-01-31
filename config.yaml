@@ -1,0 +1,33 @@
+# Model Configuration
+model:
+  name: "deepseek-ai/deepseek-llm-7b"  # Pretrained model name (you can change it to any model you want to use)
+  tokenizer_name: "deepseek-ai/deepseek-llm-7b"  # Pretrained tokenizer name
+  output_dir: "./models/deepseek_v3_finetuned"  # Output directory for saving the fine-tuned model
+  device: "cuda"  # Training device (use "cpu" if no GPU available)
+
+# Training Configuration (for fine-tuning)
+training:
+  batch_size: 2  # Batch size for training
+  num_train_epochs: 3  # Number of epochs for training
+  learning_rate: 5e-5  # Learning rate for the optimizer
+  warmup_steps: 500  # Number of steps for learning rate warm-up
+  weight_decay: 0.01  # Weight decay for regularization
+  logging_dir: "./logs"  # Directory to save training logs
+  evaluation_strategy: "epoch"  # Evaluation strategy ("epoch", "steps")
+  save_steps: 1000  # Number of steps between model saving
+  save_total_limit: 2  # Limit the number of saved models
+
+# Dataset Configuration
+dataset:
+  name: "euclaise/writingprompts"  # Dataset name or path (you can change this)
+  split: "train"  # Split to use ("train", "validation", etc.)
+  max_length: 512  # Max length for tokenization
+
+# Generation Configuration (for story generation)
+generation:
+  prompt: "Once upon a time,"  # Default prompt to generate stories
+  max_length: 500  # Maximum length of generated story
+  temperature: 0.8  # Sampling temperature (higher = more random)
+  top_p: 0.95  # Nucleus sampling (probability threshold)
+  do_sample: true  # Whether to use sampling instead of greedy decoding
+  num_return_sequences: 1  # Number of story sequences to generate
