@@ -5,8 +5,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments,
 # Load dataset
 dataset = load_from_disk("./data/writing_prompts")
 
-# Use a public model as fallback
-model_name = "EleutherAI/gpt-neo-2.7B"  # Fallback to a public model
+# Load tokenizer and model
+model_name = "deepseek-ai/deepseek-llm-7b"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
 
@@ -39,6 +39,6 @@ trainer = Trainer(
 # Train model
 trainer.train()
 
-# Save model and tokenizer
+# Save model
 model.save_pretrained("./models/deepseek_v3_finetuned")
 tokenizer.save_pretrained("./models/deepseek_v3_finetuned")
